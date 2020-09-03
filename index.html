@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="/style.css">
+    <title>Image Gallery</title>
+    <script src="/main.js"></script>
+</head>
+
+<body>
+    <div>
+        <div class="modal" id="mymodal">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="text-center">Contact Us</h3>
+                        <button class="close" data-dismiss="modal">x</button>
+                    </div>
+                    <div class="modal-body">
+                        <form name="submit-to-google-sheet">
+                            <div>
+                                <label for="name"><i class="fa fa-user"></i> Name</label>
+                                <input name="Name" type="text" placeholder="Name" class="form-control">
+                            </div>
+                            <br>
+                            <div>
+                                <label for="email"><i class="fa fa-envelope"></i> Email</label>
+                                <input name="Email" type="email" placeholder="Email" class="form-control">
+                            </div>
+                            <br>
+                            <div>
+                                <label><i class="fa fa-calendar"></i> Date Of Birth</label>
+                                <input name="Date_of_Birth" type="date" placeholder="Date of Birth" class="form-control">
+                            </div>
+                            <br>
+                            <div>
+                                <label><i class="fa fa-phone"></i> Phone Number</label>
+                                <input name="Phone" type="text" placeholder="Phone Number" class="form-control">
+                            </div>
+                            <br>
+                            <button type="submit" id="submit-form" class="btn btn-success mt-2">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h1>
+            Image Downloader
+        </h1>
+        <div class="image-grid"></div>
+    </div>
+    <script src="https://wzrd.in/standalone/formdata-polyfill"></script>
+    <script src="https://wzrd.in/standalone/promise-polyfill@latest"></script>
+    <script src="https://wzrd.in/standalone/whatwg-fetch@latest"></script>
+
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbyXI5OAm_PoOoYQuO-oyWqbClNzjpea6PMxVgvF84DtGTE_pUM/exec'
+        const form = document.forms['submit-to-google-sheet']
+
+        form.addEventListener('submit', e => {
+            e.preventDefault()
+            fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+                .then(response => console.log('Success!', response))
+                .catch(error => console.error('Error!', error.message))
+        })
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
